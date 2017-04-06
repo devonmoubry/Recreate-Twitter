@@ -42,7 +42,7 @@ Planning
 --------
 <p align="center">
   <img src="app/images/FullSizeRender.jpg-2.jpeg" width="350"/>
-  <img src="app/images/FullSizeRender.jpg-3.jpeg" width="350"/>
+  <img src="app/images/FullSizeRender.jpg-4.jpeg" width="350"/>
 </p>
 
 --------------------------------------------------------------------------------
