@@ -56,6 +56,15 @@ export default function app() {
               });
               return state;
 
+            case "SIGNUP_VIEW":
+              var newState = {
+                usertoken: null,
+                name: null,
+                view: signupView,
+                tweets: []
+              }
+              return newState;
+
             case "SIGNING_UP":
                 console.log('Hi there');
                 $.ajax({
@@ -76,7 +85,7 @@ export default function app() {
                     console.log(data);
                     var usertoken = data['usertoken']
                     var name = data['name']
-
+                    store.dispatch({ type:"NEW_USER_LOGIN", view: loginView});
                   }
                 });
                 return state;
@@ -85,6 +94,14 @@ export default function app() {
                 console.log('Thank you for registering!');
                 return state;
 
+            case "LOGGED_IN":
+                console.log('You are logged in');
+                var newState = {
+                  usertoken: action.usertoken,
+                  name: action.name,
+                  objectId: action.objectId
+                };
+                return Object.assign({}, state, newState);
 
             default:
                 console.debug(`Unhandled Action: ${action.type}!`);

@@ -1,3 +1,5 @@
+import signupView from './signup_view.js'
+
 export default function loginView( store ) {
   let state = store.getState();
   console.log('You are seeing the Login View');
@@ -6,14 +8,15 @@ export default function loginView( store ) {
 
     <section class="login-view" id=login-view>
       <a href="#" value="">Have an account? Log in.</a>
+      <i class="fa fa-twitter fa-3x"></i>
       <section class="login-dropdown" id=login-dropdown>
         <p>Have an account?</p>
         <form id="login">
-          <input type="text" id="username" placeholder="username"></input>
+          <input type="text" id="username" placeholder="email"></input>
           <input type="password" id="password" placeholder="password"></input>
           <input type="submit" value="Log in"></input>
         </form>
-        <button><a href="#">Sign up</a></button>
+        <button id="sign-up">Sign up</button>
       </section>
     </section>
 
@@ -25,6 +28,12 @@ export default function loginView( store ) {
     var username = event.target.elements.username.value;
     var password = event.target.elements.password.value;
     store.dispatch({ type: "LOGGING_IN", username: username, password: password });
+  });
+
+  $html.find('#sign-up').on('click', (event) => {
+    event.preventDefault();
+    console.log('The signup button listens');
+    store.dispatch({ type: "SIGNUP_VIEW", view: signupView });
   });
 
   return $html;
