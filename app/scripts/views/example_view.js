@@ -2,7 +2,7 @@ export default function exampleView(store) {
   let state = store.getState();
 
   //Create the HTML
-  let $html = $(`<section><h2>Check the tweets</h2></section>`);
+  let $html = $(``);
 
   //Assign any event listeners
 
