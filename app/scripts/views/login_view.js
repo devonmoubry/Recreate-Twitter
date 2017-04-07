@@ -10,7 +10,7 @@ export default function loginView( store ) {
         <p>Have an account?</p>
         <form id="login">
           <input type="text" id="username" placeholder="username"></input>
-          <input type="text" id="password" placeholder="password"></input>
+          <input type="password" id="password" placeholder="password"></input>
           <input type="submit" value="Log in"></input>
         </form>
         <button><a href="#">Sign up</a></button>
