@@ -12,9 +12,9 @@ import tweetView from './views/tweet_view.js'
 export default function app() {
 
     const initialState = {
-      username: null,
+      name: null,
       usertoken: null,
-      view: signupView,
+      view: loginView,
       tweets: []
     }
 
@@ -26,6 +26,15 @@ export default function app() {
         switch (action.type) {
             case "START":
                 return state;
+
+            case "LOGIN_VIEW":
+              console.log('login view case');
+              return state;
+
+            case "LOGGING_IN":
+              console.log('logging in case');
+              
+              return state;
 
             case "SIGNING_UP":
                 console.log('Hi there');
@@ -45,11 +54,16 @@ export default function app() {
                   }),
                   success: function (data, status, xhr) {
                     console.log(data);
-                    var usertoken = data['']
+                    var usertoken = data['usertoken']
+                    var name = data['name']
 
                   }
                 });
                 return state;
+
+                case "NEW_USER_LOGIN": //loginView
+                  console.log('Thank you for registering!');
+                  return state;
 
             default:
                 console.debug(`Unhandled Action: ${action.type}!`);
@@ -71,6 +85,6 @@ export default function app() {
     }
 
     store.subscribe(render);
-    store.dispatch({ type: "START" })
+    store.dispatch({ type: "LOGIN_VIEW" })
 
 }
