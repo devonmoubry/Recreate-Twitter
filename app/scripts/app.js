@@ -6,10 +6,11 @@ import signupView from './views/signup_view.js'
 import feedView from './views/feed_view.js'
 //import exampleView from './views/example_view.js'
 
+
 export default function app() {
 
     const initialState = {
-      view: signupView
+      view: feedView
     }
 
     const reducer = function (state, action) {
