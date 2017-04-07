@@ -48,10 +48,10 @@ export default function app() {
                 }),
                 success: function (data, status, xhr) {
                   console.log(data);
-                  //var usertoken = data['usertoken'];
+                  var usertoken = data['user-token'];
                   var name = data['name'];
-                  //var objectId = data['objectId'];
-                  store.dispatch({ type: "LOGGED_IN", /*usertoken: userTOKEN, name: name, objectId: objectId*/ });
+                  var objectId = data['objectId'];
+                  store.dispatch({ type: "LOGGED_IN", usertoken: usertoken, name: name, objectId: objectId });
                 },
               });
               return state;
@@ -81,9 +81,10 @@ export default function app() {
                 });
                 return state;
 
-                case "NEW_USER_LOGIN": //loginView
-                  console.log('Thank you for registering!');
-                  return state;
+            case "NEW_USER_LOGIN": //loginView
+                console.log('Thank you for registering!');
+                return state;
+
 
             default:
                 console.debug(`Unhandled Action: ${action.type}!`);
