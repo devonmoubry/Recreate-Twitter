@@ -85,14 +85,9 @@ export default function app() {
                     console.log(data);
                     var usertoken = data['usertoken']
                     var name = data['name']
-                    store.dispatch({ type:"NEW_USER_LOGIN", view: loginView});
                   }
                 });
-                return state;
-
-            case "NEW_USER_LOGIN": //loginView
-                console.log('Thank you for registering!');
-                return state;
+                return initialState;
 
             case "LOGGED_IN":
                 console.log('You are logged in');
@@ -101,7 +96,13 @@ export default function app() {
                   name: action.name,
                   objectId: action.objectId
                 };
-                return Object.assign({}, state, newState);
+                return Object.assign({}, state, {view: feedView});
+
+            case "FEED_VIEW":
+                var newState =
+                  Object.assign({}, currentState, {view: feedView});
+                  console.log('This is your Twitter Feed');
+                return newState;
 
             default:
                 console.debug(`Unhandled Action: ${action.type}!`);
