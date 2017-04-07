@@ -51,7 +51,7 @@ export default function app() {
                   var usertoken = data['user-token'];
                   var name = data['name'];
                   var objectId = data['objectId'];
-                  store.dispatch({ type: "LOGGED_IN", usertoken: usertoken, name: name, objectId: objectId });
+                  store.dispatch({ type: "LOGGED_IN", usertoken: usertoken, name: name, objectId: objectId, view: feedView });
                 },
               });
               return state;
@@ -83,8 +83,8 @@ export default function app() {
                   }),
                   success: function (data, status, xhr) {
                     console.log(data);
-                    var usertoken = data['usertoken']
-                    var name = data['name']
+                    var usertoken = data['usertoken'];
+                    var name = data['name'];
                   }
                 });
                 return initialState;
@@ -94,15 +94,17 @@ export default function app() {
                 var newState = {
                   usertoken: action.usertoken,
                   name: action.name,
-                  objectId: action.objectId
+                  objectId: action.objectId,
+                  view: feedView
                 };
-                return Object.assign({}, state, {view: feedView});
+                return Object.assign({}, state, newState);
 
             case "FEED_VIEW":
-                var newState =
-                  Object.assign({}, currentState, {view: feedView});
-                  console.log('This is your Twitter Feed');
-                return newState;
+                var newState = {
+                  name: action.name
+                };
+                console.log('This is your Twitter Feed');
+                return Object.assign({}, state, newState);
 
             default:
                 console.debug(`Unhandled Action: ${action.type}!`);

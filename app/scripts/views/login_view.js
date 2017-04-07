@@ -12,8 +12,8 @@ export default function loginView( store ) {
       <section class="login-dropdown" id=login-dropdown>
         <p>Have an account?</p>
         <form id="login">
-          <input type="text" id="username" placeholder="email"></input>
-          <input type="password" id="password" placeholder="password"></input>
+          <input type="text" id="username" placeholder="email" value="frank@example.com"></input>
+          <input type="password" id="password" placeholder="password" value="password"></input>
           <input type="submit" value="Log in"></input>
         </form>
         <button id="sign-up">Sign up</button>

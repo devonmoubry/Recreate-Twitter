@@ -1,6 +1,8 @@
 export default function feedView( store ) {
   let state = store.getState();
 
+let name = state.name;
+
   let $html = $(`
     <section class="feed-view-container">
       <header class="feed-header" id="feed header">
@@ -9,7 +11,7 @@ export default function feedView( store ) {
         <i class="fa fa-user-circle-o fa-lg" aria-hidden="true"></i>
       </header>
       <section class="profile-dropdown">
-        <p>Your Name</p>
+        <p>${ name }</p>
         <a href="#">View Profile</a>
         <a href="#">Logout</a>
       </section>
@@ -17,6 +19,8 @@ export default function feedView( store ) {
       </section>
     </section>
   `);
+
+
 
   return $html;
 }
