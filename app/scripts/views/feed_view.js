@@ -1,13 +1,19 @@
+import tweetView from './tweet_view.js'
+
 export default function feedView( store ) {
+
   let state = store.getState();
 
-let name = state.name;
+  let name = state.name;
 
   let $html = $(`
     <section class="feed-view-container">
       <header class="feed-header" id="feed header">
         <i class="fa fa-user-circle-o fa-lg" aria-hidden="true"></i>
-        <input type="text" placeholder="What's happening?"></input>
+        <form id="send-tweet">
+          <input type="text" id="tweet" placeholder="What's happening?"></input>
+          <button type="submit"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+        </form>
         <i class="fa fa-user-circle-o fa-lg" aria-hidden="true"></i>
       </header>
       <section class="profile-dropdown">
@@ -16,11 +22,18 @@ let name = state.name;
         <a href="#">Logout</a>
       </section>
       <section class="feed-container" id="feed-container">
+        <ul class="tweets">
+        </ul>
       </section>
     </section>
   `);
 
-
+$html.find('#send-tweet').on('submit', (event) => {
+  event.preventDefault();
+  var tweet = event.target.elements['tweet'].value;
+  console.log('the send tweet button works');
+  store.dispatch({ type: "NEW_TWEET", tweet: tweet });
+});
 
   return $html;
 }
