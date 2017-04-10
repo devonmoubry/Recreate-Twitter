@@ -8,7 +8,7 @@ export default function feedView( store ) {
 
   let $html = $(`
     <section class="feed-view-container">
-      <header class="feed-header" id="feed header">
+      <header class="feed-header" id="feed-header">
         <i class="fa fa-user-circle-o fa-lg" aria-hidden="true"></i>
         <form id="send-tweet">
           <input type="text" id="tweet" placeholder="What's happening?"></input>
@@ -21,12 +21,12 @@ export default function feedView( store ) {
         <a href="#">View Profile</a>
         <a href="#">Logout</a>
       </section>
-      <section class="feed-container" id="feed-container">
-        <ul class="tweets">
-        </ul>
-      </section>
+      <section class="feed-container" id="feed-container"></section>
     </section>
   `);
+
+  var $tweets = tweetView(store);
+  $html.find('#feed-container').append($tweets);
 
 $html.find('#send-tweet').on('submit', (event) => {
   event.preventDefault();

@@ -52,6 +52,7 @@ export default function app() {
                     var name = data['name'];
                     var objectId = data['objectId'];
                     store.dispatch({ type: "LOGGED_IN", usertoken: usertoken, name: name, objectId: objectId, view: feedView });
+                    store.dispatch({ type: "LOAD_TWEETS" });
                   },
                 });
                 return state;
@@ -118,14 +119,44 @@ export default function app() {
                     "Content-Type": "application/json"
                   },
                   data: JSON.stringify({
-                    "tweet": action.tweet
+                    "tweet": action.tweet,
+                    "user": { objectId: store.getState().objectId, '___class': 'Users' }
                   }),
                   success: function ( data, status, xhr ) {
                     console.log(data);
-
+                    store.dispatch({ type: "LOAD_TWEETS" });
                   },
                   error: function ( data, status, xhr ) {
                     console.log(data);
+                  }
+                });
+                return state;
+
+            case "SENT_TWEETS":
+                var newState = {
+                  tweets: action.tweets,
+                  view: feedView
+                };
+                console.log('All tweets works!');
+                return Object.assign({}, state, newState);
+
+            case "LOAD_TWEETS":
+                $.ajax({
+                  type: 'GET',
+                  url: 'https://api.backendless.com/v1/data/tweets?loadRelations=user',
+                  headers: {
+                    "application-id": "24B65924-C870-5359-FF6E-4A5396B35700",
+                    "secret-key": "BFBB0F72-782B-9CF9-FF71-D0C15271A900",
+                    "application-type": "REST"
+                  },
+                  success: function( data, status, xhr ) {
+                    console.log('Here is the data, ', data);
+                    var tweets = data.data;
+                    store.dispatch({ type: "SENT_TWEETS", tweets: tweets });
+                  },
+                  error: function( data, status, xhr ) {
+                    console.log(data);
+                    console.log(status);
                   }
                 });
                 return state;
