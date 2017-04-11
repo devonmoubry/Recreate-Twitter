@@ -18,13 +18,26 @@ export default function ( store ) {
 
       if (tweet.user.name === store.getState().name) {
             $tweetView.append($(`
-              <section class="edit-delete" id="edit-delete">
-                <button id="edit">Edit</button>
-                <button id="delete">Delete</button>
+              <section class="edit-delete">
+                <button>Edit</button>
+                <button>Delete</button>
+                <form>
+                  <input type="text"></input>
+                  <input type="hidden" value="${tweet.objectId}"></input>
+                  <button type="submit">SAVE</button>
+                </form>
               </section>`));
         }
 
         $twitterFeed.append($tweetView);
   });
+
+  $twitterFeed.find('.edit-delete form').on('submit', (event) => {
+    event.preventDefault();
+    var tweet = event.target.elements[0].value
+    var objectId = event.target.elements[1].value
+    store.dispatch({ type: "EDIT_TWEET", tweet: tweet, objectId: objectId });
+  });
+
   return $twitterFeed;
 }

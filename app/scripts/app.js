@@ -161,6 +161,31 @@ export default function app() {
                 });
                 return state;
 
+            case "EDIT_TWEET":
+                $.ajax({
+                  type: 'PUT',
+                  url: 'https://api.backendless.com/v1/data/tweets/' + action.objectId,
+                  headers: {
+                    "application-id": "24B65924-C870-5359-FF6E-4A5396B35700",
+                    "secret-key":  "BFBB0F72-782B-9CF9-FF71-D0C15271A900",
+                    "user-token": store.getState().usertoken,
+                    "application-type": "REST",
+                    "Content-Type": "application/json"
+                  },
+                  data: JSON.stringify({
+                    "tweet": action.tweet,
+                    "user": { objectId: store.getState().objectId, '___class': 'Users' }
+                  }),
+                  success: function ( data, status, xhr ) {
+                    console.log(data);
+                    store.dispatch({ type: "LOAD_TWEETS" });
+                  },
+                  error: function ( data, status, xhr ) {
+                    console.log(data);
+                  }
+                });
+                return state;
+
             default:
                 console.debug(`Unhandled Action: ${action.type}!`);
                 return state;
