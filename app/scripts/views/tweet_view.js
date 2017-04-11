@@ -16,11 +16,11 @@ export default function ( store ) {
       </li>
       `);
 
-      if (tweet.user.name === 'frank medrano') {
+      if (tweet.user.name === store.getState().name) {
             $tweetView.append($(`
               <section class="edit-delete" id="edit-delete">
-                <p>Edit</p>
-                <p>Delete</p>
+                <button id="edit">Edit</button>
+                <button id="delete">Delete</button>
               </section>`));
         }
 
