@@ -18,7 +18,6 @@ export default function feedView( store ) {
       </header>
       <section class="profile-dropdown">
         <p>${ name }</p>
-        <a href="#">View Profile</a>
         <a href="#">Logout</a>
       </section>
       <section class="feed-container" id="feed-container"></section>

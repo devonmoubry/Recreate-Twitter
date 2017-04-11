@@ -10,7 +10,7 @@ export default function ( store ) {
     var $tweetView = $(`
       <li class="tweet-view">
         <i class="fa fa-user-circle-o" aria-hidden="true"></i>
-        <p class="username">${tweet.user.name}</p>
+        <a href="#" class="username">${tweet.user.name}</a>
         <p class="tweet-text">${tweet.tweet}</p>
         <p class="timestamp">${tweet.created}</p>
       </li>
@@ -37,6 +37,13 @@ export default function ( store ) {
     var tweet = event.target.elements[0].value
     var objectId = event.target.elements[1].value
     store.dispatch({ type: "EDIT_TWEET", tweet: tweet, objectId: objectId });
+  });
+
+  $twitterFeed.find('.username').click (event => {
+    event.preventDefault()
+    console.log('profile clicker');
+    var name = event.target.outerText;
+    store.dispatch({ type: "CURRENT_PROFILE_TWEETS", name: name });
   });
 
   return $twitterFeed;

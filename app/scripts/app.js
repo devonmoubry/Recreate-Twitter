@@ -15,7 +15,8 @@ export default function app() {
       name: null,
       usertoken: null,
       view: loginView,
-      tweets: []
+      tweets: [],
+      profileTweets: []
     }
 
     const reducer = function (state, action) {
@@ -185,6 +186,24 @@ export default function app() {
                   }
                 });
                 return state;
+
+              case "CURRENT_PROFILE_TWEETS":
+                  var profileUserName = action.name;
+
+                  var profileTweets = [];
+                  state.tweets.forEach(function(tweet) {
+                    if (tweet.user.name == profileUserName) {
+                      profileTweets.push(tweet);
+                    }
+                  });
+
+                  var newState = {
+                    currentProfileName: profileUserName,
+                    profileTweets: profileTweets,
+                    view: profileView
+                  };
+                  
+                  return Object.assign({}, state, newState);
 
             default:
                 console.debug(`Unhandled Action: ${action.type}!`);
