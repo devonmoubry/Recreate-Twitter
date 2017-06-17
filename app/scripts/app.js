@@ -6,8 +6,6 @@ import signupView from './views/signup_view.js'
 import feedView from './views/feed_view.js'
 import profileView from './views/profile_view.js'
 import tweetView from './views/tweet_view.js'
-//import exampleView from './views/example_view.js'
-
 
 export default function app() {
 
@@ -202,7 +200,7 @@ export default function app() {
                     profileTweets: profileTweets,
                     view: profileView
                   };
-                  
+
                   return Object.assign({}, state, newState);
 
             default:

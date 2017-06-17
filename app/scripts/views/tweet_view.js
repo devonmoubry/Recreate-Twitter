@@ -5,7 +5,6 @@ export default function ( store ) {
   //edit and delete dropdown conditional upon ownership
   var $twitterFeed = $('<ul class=""><ul>');
   var tweets = store.getState().tweets;
-
   tweets.forEach( function( tweet, index, array ) {
     var $tweetView = $(`
       <li class="tweet-view">
